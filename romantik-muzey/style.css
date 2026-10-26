@@ -1,0 +1,141 @@
+:root{
+  --rose:#e8557a; --rose-d:#b02a52; --gold:#e0b45a; --cream:#fbf1e6; --wine:#3a0f20;
+  --serif:"Playfair Display", Georgia, "Times New Roman", serif;
+  --script:"Great Vibes", "Brush Script MT", cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#000;color:var(--cream);font-family:var(--serif);
+  overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{display:flex;align-items:center;justify-content:center;height:100vh;height:100dvh}
+.hidden{display:none !important}
+button{font-family:var(--serif);touch-action:manipulation}
+
+/* ---------- 16:9 sahna. 1em = sahna balandligining 1/45 qismi ---------- */
+#stage{
+  position:relative;overflow:hidden;background:#1a0a12;
+  width:min(100vw,177.78vh);width:min(100vw,177.78dvh);
+  aspect-ratio:16/9;
+  font-size:calc(min(56.25vw,100vh)/45);
+  font-size:calc(min(56.25vw,100dvh)/45);
+}
+#app{position:absolute;inset:0}
+#app canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+#app canvas:active{cursor:grabbing}
+
+/* ---------- Kirish ---------- */
+#intro{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 30%, rgba(120,25,60,.9), rgba(20,5,12,.97))}
+.intro-card{text-align:center;max-width:46em;animation:rise .9s ease both}
+.heart-big{font-size:min(4.6em,54px);line-height:1;color:var(--rose);animation:beat 1.4s infinite;text-shadow:0 0 28px rgba(232,85,122,.8)}
+#introTitle{font-family:var(--script);font-weight:400;font-size:min(8em,84px);line-height:1.05;color:#ffd9e3;text-shadow:0 0 24px rgba(232,85,122,.55)}
+#introSub{font-style:italic;font-weight:400;font-size:min(2.6em,26px);color:var(--gold);margin-top:.2em}
+#introText{margin:.7em auto 1em;font-size:min(2em,17px);line-height:1.5;opacity:.9;max-width:24em}
+#startBtn{font-size:min(2.4em,20px);padding:.6em 1.8em;border-radius:999px;border:1px solid var(--gold);
+  background:linear-gradient(135deg,var(--rose),var(--rose-d));color:#fff;cursor:pointer;
+  box-shadow:0 .4em 1.4em rgba(232,85,122,.4);transition:transform .2s, box-shadow .2s}
+#startBtn:hover{transform:translateY(-2px) scale(1.03)}
+.keys{margin-top:1.4em;display:flex;flex-wrap:wrap;justify-content:center;gap:.3em 1.6em;font-size:min(1.5em,13px);opacity:.75}
+.keys b{color:var(--gold);font-weight:700}
+.keys-touch{display:none}
+body.is-touch .keys-desk{display:none}
+body.is-touch .keys-touch{display:flex}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+@keyframes rise{from{opacity:0;transform:translateY(1em)}to{opacity:1;transform:none}}
+
+/* ---------- HUD ---------- */
+#hud{position:absolute;inset:0;z-index:10;pointer-events:none}
+.hud-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-start;padding:.6em .8em 0}
+#hudTitle{font-family:var(--script);font-size:min(3.2em,28px);line-height:1;color:#ffd9e3;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.hud-btns{display:flex;gap:.4em;pointer-events:auto}
+.hud-btns button{font-size:min(1.9em,15px);min-width:2.4em;padding:.45em .9em;border-radius:999px;cursor:pointer;
+  border:1px solid rgba(224,180,90,.6);background:rgba(40,10,24,.62);color:var(--cream);backdrop-filter:blur(6px)}
+.hud-btns button:hover{background:rgba(176,42,82,.75)}
+body.is-touch .hud-btns button{height:3em;min-width:3em;padding:.1em .5em;font-size:1.3em;border-radius:999px}
+body.is-touch .hud-btns .lbl{display:none}
+
+#hint{position:absolute;left:50%;bottom:3.4em;transform:translateX(-50%);pointer-events:auto;white-space:nowrap;
+  font-size:min(2.1em,17px);padding:.5em 1.2em;border-radius:999px;cursor:pointer;
+  border:1px solid var(--gold);background:rgba(58,15,32,.82);color:#fff;backdrop-filter:blur(6px);animation:pulse 1.6s infinite}
+body.is-touch #hint{bottom:auto;top:1.3em;pointer-events:none;animation:none;font-size:min(2.2em,15px);font-family:var(--script);font-size:3em;padding:.1em .8em}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,85,122,.5)}50%{box-shadow:0 0 0 .6em rgba(232,85,122,0)}}
+#help{position:absolute;left:1.6em;bottom:1.1em;font-size:min(1.5em,12px);opacity:.6;text-shadow:0 1px 6px #000}
+body.is-touch #help{display:none}
+
+/* ---------- Telefon boshqaruvi ---------- */
+#touch{display:none}
+body.is-touch #touch{display:block}
+
+/* Joystik — chap pastda */
+#joy{
+  display:none;position:absolute;
+  left:1em;bottom:1em;
+  width:8em;height:8em;
+  border-radius:50%;pointer-events:auto;touch-action:none;
+  background:radial-gradient(circle, rgba(255,255,255,.12), rgba(255,255,255,.03));
+  border:.12em solid rgba(255,255,255,.28)
+}
+#stick{
+  position:absolute;
+  left:calc(50% - 1.7em);top:calc(50% - 1.7em);
+  width:3.4em;height:3.4em;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #ff8fae, var(--rose-d));
+  box-shadow:0 0 .8em rgba(232,85,122,.8)
+}
+
+/* Umumiy tugma uslubi */
+.tbtn{
+  position:absolute;pointer-events:auto;touch-action:none;
+  border-radius:50%;cursor:pointer;color:#fff;
+  border:.14em solid rgba(224,180,90,.8);
+  background:rgba(58,15,32,.62);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;transition:transform .08s, background .15s
+}
+.tbtn:active,.tbtn.on{transform:scale(.92);background:rgba(232,85,122,.85)}
+
+/* O'ng pastdagi tugmalar */
+#actBtn{right:.8em;bottom:.8em;width:4.5em;height:4.5em;font-size:2em;
+  background:linear-gradient(135deg,var(--rose),var(--rose-d));animation:pulse 1.6s infinite}
+#runBtn{right:6em;bottom:.9em;width:3.4em;height:3.4em;font-size:1.6em}
+
+/* Burish tugmalari — actBtn ustida */
+#btnL{right:5.8em;bottom:5.2em;width:3em;height:3em;font-size:1.4em}
+#btnR{right:1.4em;bottom:5.2em;width:3em;height:3em;font-size:1.4em}
+
+/* ---------- Rasmni kattalashtirish ---------- */
+#lightbox{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:1em;
+  background:rgba(14,3,8,.93);backdrop-filter:blur(6px);padding:1.5em;animation:rise .35s ease both}
+#lightbox figure{max-width:68em;text-align:center;touch-action:pan-y}
+#lbImg{max-width:100%;max-height:30em;border:.7em solid #f6ecd9;outline:.2em solid var(--gold);border-radius:3px;box-shadow:0 1em 3em rgba(0,0,0,.7)}
+#lbCap{font-family:var(--script);font-size:min(4em,36px);margin-top:.35em;color:#ffd9e3;min-height:1.2em}
+#lightbox button{font-size:min(4em,34px);line-height:1;width:1.5em;height:1.5em;border-radius:50%;cursor:pointer;flex:none;
+  border:1px solid rgba(224,180,90,.6);background:rgba(58,15,32,.7);color:var(--cream)}
+#lightbox button:hover{background:var(--rose-d)}
+body.is-touch #lightbox button{font-size:5em}
+#lbClose{position:absolute;top:.6em;right:.8em;font-size:min(2.6em,22px) !important}
+body.is-touch #lbClose{font-size:3.6em !important}
+#dropHint{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+  font-family:var(--script);font-size:54px;background:rgba(176,42,82,.6);border:4px dashed var(--gold);pointer-events:none}
+
+/* ---------- Telefon tik holatda ---------- */
+#rotate{display:none;position:fixed;inset:0;z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:radial-gradient(ellipse at 50% 30%, #6b1836, #14050c);text-align:center;padding:24px;font-size:20px}
+#rotate .rot-ico{font-size:64px;animation:rot 2.2s ease-in-out infinite}
+#rotate b{color:var(--gold)}
+@keyframes rot{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+@media (orientation:portrait){
+  body.is-phone #rotate{display:flex}
+  body.is-phone #stage{visibility:hidden}
+}
+
+/* ---------- Strelka tugmalari (D-pad) ---------- */
+#dpad{position:absolute;left:1em;bottom:1em;width:12em;height:12em}
+#dpad .d{width:4em;height:4em;font-size:1.9em;background:rgba(58,15,32,.6)}
+#dUp{left:4em;top:0}
+#dLeft{left:0;top:4em}
+#dRight{left:8em;top:4em}
+#dDown{left:4em;top:8em}
+body.use-joy #dpad{display:none}
+body.use-joy #joy{display:block}
+body:not(.is-touch) #padBtn{display:none}
+

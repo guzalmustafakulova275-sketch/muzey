@@ -1,0 +1,9 @@
+{
+  "name": "romantik-muzey-3d",
+  "version": "1.0.0",
+  "description": "Romantik 3D muzey simulyatori — galereya, panda personaj (Three.js)",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes http-server . -p 5173 -c-1 -o"
+  }
+}

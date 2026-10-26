@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#000000" />
+<title>Sevgi Muzeyi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- 16:9 sahna: butun oʻyin shu ichida -->
+<div id="stage">
+  <div id="app"></div>
+
+  <div id="intro">
+    <div class="intro-card">
+      <div class="heart-big">♥</div>
+      <h1 id="introTitle">Sevgi Muzeyi</h1>
+      <h2 id="introSub"></h2>
+      <p id="introText"></p>
+      <button id="startBtn">Muzeyga kirish ♥</button>
+      <div class="keys keys-desk">
+        <span><b>W A S D</b> — yurish</span>
+        <span><b>Shift</b> — yugurish</span>
+        <span><b>Sudrash</b> — atrofga qarash</span>
+        <span><b>F</b> — rasmni kattalashtirish</span>
+      </div>
+      <div class="keys keys-touch">
+        <span><b>▲ ▼ ◀ ▶</b> — yurish</span>
+        <span><b>Ekranni sudrash</b> yoki <b>↶ ↷</b> — qarash</span>
+        <span><b>🔍</b> — rasmni kattalashtirish</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="hud" class="hidden">
+    <div class="hud-top">
+      <div id="hudTitle"></div>
+      <div class="hud-btns">
+        <button id="addBtn">📷 <span class="lbl">Rasm qoʻshish</span></button>
+        <button id="padBtn" title="Boshqaruv turi: strelkalar / joystik">🕹</button>
+        <button id="musicBtn" class="hidden">🔊</button>
+        <button id="fsBtn" title="Butun ekran">⛶</button>
+      </div>
+    </div>
+    <div id="hint" class="hidden"></div>
+    <div id="help">WASD — yurish · Shift — yugurish · Sudrash — qarash · F — rasm</div>
+
+    <!-- Telefon boshqaruvi -->
+    <div id="touch">
+      <div id="dpad">
+        <button id="dUp" class="tbtn d" aria-label="Oldinga">▲</button>
+        <button id="dLeft" class="tbtn d" aria-label="Chapga">◀</button>
+        <button id="dRight" class="tbtn d" aria-label="Oʻngga">▶</button>
+        <button id="dDown" class="tbtn d" aria-label="Orqaga">▼</button>
+      </div>
+      <div id="joy"><div id="stick"></div></div>
+      <button id="btnL" class="tbtn" aria-label="Kamerani chapga burish">↶</button>
+      <button id="btnR" class="tbtn" aria-label="Kamerani oʻngga burish">↷</button>
+      <button id="runBtn" class="tbtn" aria-label="Yugurish">🏃</button>
+      <button id="actBtn" class="tbtn hidden" aria-label="Rasmni koʻrish">🔍</button>
+    </div>
+  </div>
+
+  <div id="lightbox" class="hidden">
+    <button id="lbClose">✕</button>
+    <button id="lbPrev">‹</button>
+    <figure>
+      <img id="lbImg" alt="" />
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+    <button id="lbNext">›</button>
+  </div>
+</div>
+
+<!-- Telefon tik holatda boʻlsa -->
+<div id="rotate">
+  <div class="rot-ico">📱</div>
+  <p>Telefonni <b>yotiq</b> holatga buring</p>
+</div>
+
+<input id="fileInput" type="file" accept="image/*" multiple hidden />
+<div id="dropHint" class="hidden">Rasmlarni shu yerga tashlang ♥</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
